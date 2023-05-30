@@ -1,9 +1,4 @@
 
-import { useState } from "react";
-import Alert from "./components/Alert";
-import Button from "./components/button";
-import Like from "./components/Like";
-
 function App() {
   const [alertState, setAlertState] = useState(false);
   return (
