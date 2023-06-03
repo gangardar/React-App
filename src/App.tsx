@@ -1,6 +1,13 @@
 import { FieldValues, useForm } from "react-hook-form";
+import { INVALID, z } from "zod";
 
 function App() {
+  const schema = z.object({
+    description: z.string().min(5, { message: "State the clear description." }),
+    amount: z.number({ invalid_type_error: "Amount Field is Required" }),
+    category: z.string({ invalid_type_error: "Select one category" }),
+  });
+
   const { register, handleSubmit } = useForm();
   const onSubmit = (data: FieldValues) => console.log(data);
 
@@ -32,14 +39,15 @@ function App() {
         <label htmlFor="category" className="form-lable">
           Category
           <select
-            {...register("category")}
             name="selectedCategory"
             className="form-select"
             aria-label="Default select example"
             id="category"
           >
             <option selected></option>
-            <option value="Grocery">Grocery</option>
+            <option {...register("category")} value="Grocery">
+              Grocery
+            </option>
             <option value="Grocery">Entertainment</option>
             <option value="Grocery">Accessories</option>
           </select>
